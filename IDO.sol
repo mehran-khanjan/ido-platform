@@ -17,4 +17,15 @@ contract IDO is Ownable {
         idoTitle = _title;
         emit NewSelfStarter(_msgSender(), address(this), block.timestamp, uint(0));
     }
+
+    modifier onlyPreLaunch(uint256 _id) {
+        if(_isManual(_id)){
+            require(!pools[_id].enabled, "Pool is already enabled");
+            require(!pools[_id].finished, "Pool is already completed");
+        }else{
+            require(block.timestamp < pools[_id].startTime, "Pool start time has passed");
+        }
+        _;
+    }
+
 }
