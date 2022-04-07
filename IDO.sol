@@ -28,4 +28,8 @@ contract IDO is Ownable {
         _;
     }
 
+    function _isOnlyHolder(uint256 _id) internal view returns(bool){
+        return ( pools[_id].onlyHolderToken != address(0) &&  pools[_id].minHolderBalance > uint256(0));
+    }
+
 }
