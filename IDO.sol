@@ -32,4 +32,8 @@ contract IDO is Ownable {
         return ( pools[_id].onlyHolderToken != address(0) &&  pools[_id].minHolderBalance > uint256(0));
     }
 
+    function _isManual(uint256 _id) internal view returns(bool){
+        return ( pools[_id].startTime == 0 && pools[_id].timespan == 0);
+    }
+
 }
