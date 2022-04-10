@@ -36,4 +36,8 @@ contract IDO is Ownable {
         return ( pools[_id].startTime == 0 && pools[_id].timespan == 0);
     }
 
+    function setMinHolderAmount(uint256 _id, uint256 _minHolderBalance) external onlyOwner onlyPreLaunch(_id) {
+        pools[_id].minHolderBalance = _minHolderBalance;
+    }
+
 }
