@@ -40,4 +40,8 @@ contract IDO is Ownable {
         pools[_id].minHolderBalance = _minHolderBalance;
     }
 
+    function setHolderToken(uint256 _id, address _holderToken) external onlyOwner onlyPreLaunch(_id) {
+        pools[_id].onlyHolderToken = _holderToken;
+    }
+
 }
