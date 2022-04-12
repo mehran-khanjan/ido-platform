@@ -44,4 +44,11 @@ contract IDO is Ownable {
         pools[_id].onlyHolderToken = _holderToken;
     }
 
+    function setStartTime(uint256 _id, uint256 _startTime) external onlyOwner onlyPreLaunch(_id) {
+        if(_startTime > 0){
+            require(_startTime > block.timestamp, "Start time must be in future");
+        }
+        pools[_id].startTime = _startTime;
+    }
+
 }
