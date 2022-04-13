@@ -51,4 +51,13 @@ contract IDO is Ownable {
         pools[_id].startTime = _startTime;
     }
 
+    function setTimespan(uint256 _id, uint256 _timespan) external onlyOwner onlyPreLaunch(_id) {
+        if(_timespan > 0){
+            require((pools[_id].startTime + _timespan) > block.timestamp, "pool must end in the future, set start time");
+        }
+        require(pools[_id].startTime > 0, "Start time must be set first");
+        uint256 computedTimespan = (pools[_id].startTime > 0 && _timespan < minSpan) ? minSpan : _timespan;
+        pools[_id].timespan = computedTimespan;
+    }
+
 }
