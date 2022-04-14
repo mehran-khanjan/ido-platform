@@ -60,4 +60,8 @@ contract IDO is Ownable {
         pools[_id].timespan = computedTimespan;
     }
 
+    function setTitle(string memory _title) external onlyOwner{
+        idoTitle = _title;
+    }
+
 }
