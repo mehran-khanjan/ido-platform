@@ -64,4 +64,12 @@ contract IDO is Ownable {
         idoTitle = _title;
     }
 
+    function addWhiteList(uint256 id, address[] calldata _whiteList, uint256[] calldata _caps) external onlyOwner onlyPreLaunch(id) {
+        require(_whiteList.length == _caps.length, "whitelist array length mismatch");
+        for (uint256 i = 0; i < _whiteList.length; ++i) {
+            whiteList[id][_whiteList[i]] = _caps[i];
+        }
+        emit WhiteList(id);
+    }
+
 }
