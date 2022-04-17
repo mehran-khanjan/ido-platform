@@ -72,4 +72,8 @@ contract IDO is Ownable {
         emit WhiteList(id);
     }
 
+    function poolsLength() external view returns (uint256) {
+        return pools.length;
+    }
+
 }
