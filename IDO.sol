@@ -76,4 +76,43 @@ contract IDO is Ownable {
         return pools.length;
     }
 
+    function createPool(
+        uint256 cap,
+        uint256 price,
+        uint256 maxContribution,
+        IERC20 token,
+        bool isWhiteList,
+        address onlyHolderToken,
+        uint256 minHolderBalance,
+        uint256 startTime,
+        uint256 timespan
+
+    ) external onlyOwner returns (uint256) {
+        require(cap <= token.balanceOf(_msgSender()) && cap > 0, "Cap check");
+        require(address(token) != address(0), "Pool token cannot be zero address");
+        require(price > uint256(0), "Price must be greater than 0");
+        if(startTime > 0){
+            require(startTime > block.timestamp, "Start time must be in future");
+        }
+        uint256 computedTimespan = (startTime > 0 && timespan < minSpan) ? minSpan : timespan;
+        Pool memory newPool =
+        Pool(
+            cap,
+            price,
+            maxContribution,
+            token,
+            isWhiteList,
+            onlyHolderToken,
+            minHolderBalance,
+            startTime,
+            computedTimespan,
+            false,
+            false
+        );
+        pools.push(newPool);
+        token.transferFrom(_msgSender(), address(this), cap);
+        emit NewPool(_msgSender(), address(this), pools.length);
+        return pools.length;
+    }
+
 }
