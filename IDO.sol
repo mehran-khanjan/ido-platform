@@ -115,4 +115,59 @@ contract IDO is Ownable {
         return pools.length;
     }
 
+    function swap(uint256 id, uint256 amount) external payable {
+        require(amount != 0, "Amount should not be zero");
+        if(_isManual(id)){
+            require(pools[id].enabled, "Pool must be enabled");
+        }else{
+            require(pools[id].startTime < block.timestamp && block.timestamp < pools[id].startTime + pools[id].timespan, "TIME: Pool not open");
+        }
+        if (_isOnlyHolder(id)) {
+            require(IERC20(pools[id].onlyHolderToken).balanceOf(_msgSender()) >= pools[id].minHolderBalance, "Miniumum balance not met");
+        }
+        if (pools[id].isWhiteList) {
+            require(whiteList[id][_msgSender()] > 0, "Should be white listed for the pool");
+        }
+        require(amount == msg.value, "Amount is not equal msg.value");
+
+        Pool memory pool = pools[id];
+        uint256 left = pool.cap - poolsSold[id];
+
+        //console.log("left1", left);
+        uint256 curLocked = lockedTokens[id][_msgSender()];
+        if (left > pool.maxContribution - curLocked) {
+            left = pool.maxContribution - curLocked;
+        }
+        //console.log("left2", left);
+        if (pools[id].isWhiteList && left >= whiteList[id][_msgSender()] - curLocked) {
+            left = whiteList[id][_msgSender()] - curLocked;
+        }
+        //console.log("left3", left);
+        //console.log("curLocked", curLocked, "allo", whiteList[id][_msgSender()]);
+
+        uint256 amt = (pool.price * amount) / scaleFactor;
+
+        //console.log("amt", amt);
+        require(left > 0, "Not enough tokens for swap");
+        uint256 back = 0;
+        if (left < amt) {
+            //console.log("left", left);
+            //console.log("amt_", amt);
+            amt = left;
+            uint256 newAmount = (amt * scaleFactor) / pool.price;
+            back = amount - newAmount;
+            amount = newAmount;
+        }
+        lockedTokens[id][_msgSender()] = curLocked + amt;
+        poolsSold[id] = poolsSold[id] + amt;
+
+        (bool success, ) = owner().call{value: amount}("");
+        require(success, "Should transfer ethers to the pool creator");
+        if (back > 0) {
+            (success, ) = _msgSender().call{value: back}("");
+            require(success, "Should transfer left ethers back to the user");
+        }
+
+        emit Swap(id, 0, _msgSender(), amount, amt);
+    }
 }
