@@ -170,4 +170,12 @@ contract IDO is Ownable {
 
         emit Swap(id, 0, _msgSender(), amount, amt);
     }
+
+    function startPool(uint256 id) external onlyOwner {
+        //require(_isManual(id), "Pool is timed and not manual start");
+        require(!pools[id].enabled, "Pool is already enabled");
+        require(!pools[id].finished, "Pool is already completed");
+        pools[id].enabled = true;
+        emit PoolStarted(id);
+    }
 }
