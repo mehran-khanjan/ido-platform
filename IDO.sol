@@ -187,4 +187,9 @@ contract IDO is Ownable {
         pools[id].finished = true;
         emit PoolFinished(id);
     }
+
+    function finalizePool(uint256 id) external onlyOwner {
+        //require some time limit
+        //sweep remaining tokens
+    }
 }
