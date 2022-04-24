@@ -192,4 +192,17 @@ contract IDO is Ownable {
         //require some time limit
         //sweep remaining tokens
     }
+
+    function claim(uint256 id) external {
+        if(_isManual(id)){
+            require(pools[id].finished, "Cannot claim until pool is finished");
+        }else{
+            require(block.timestamp > pools[id].startTime + pools[id].timespan);
+        }
+        require(lockedTokens[id][_msgSender()] > 0, "Should have tokens to claim");
+        uint256 amount = lockedTokens[id][_msgSender()];
+        lockedTokens[id][_msgSender()] = 0;
+        pools[id].token.transfer(_msgSender(), amount);
+        emit Claim(id, _msgSender(), amount);
+    }
 }
