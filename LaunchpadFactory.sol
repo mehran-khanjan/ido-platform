@@ -6,4 +6,17 @@ import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
 import "./SelfStarterV2.sol";
 
-contract LaunchpadFactory is Ownable, ReentrancyGuard {}
+contract LaunchpadFactory is Ownable, ReentrancyGuard {
+    string public version = "v0.0";
+    bool public whitelistEnforced;
+    mapping (address => bool) public whitelistedOperators;
+
+    // owner => launchpads[]
+    mapping (address => address[]) public launchpads;
+    //launchpad => launch timestamp
+    mapping (address => uint256) public launchIndex;
+    // launchpad => owner
+    mapping (address => address) public operator;
+
+    event LaunchpadDeployed(address indexed launchpadAddress, address indexed creator);
+}
