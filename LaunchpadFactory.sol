@@ -19,4 +19,8 @@ contract LaunchpadFactory is Ownable, ReentrancyGuard {
     mapping (address => address) public operator;
 
     event LaunchpadDeployed(address indexed launchpadAddress, address indexed creator);
+
+    constructor(string memory _version) {
+        version = _version;
+    }
 }
