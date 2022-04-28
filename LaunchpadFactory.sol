@@ -23,4 +23,18 @@ contract LaunchpadFactory is Ownable, ReentrancyGuard {
     constructor(string memory _version) {
         version = _version;
     }
+
+    function launch(string memory _launchpadTitle) external returns (SelfStarterV2) {
+        if(whitelistEnforced){
+            require(whitelistedOperators[_msgSender()], "FACTORY: OPERATOR NOT WHITELISTED");
+        }
+        SelfStarterV2 launchpad = new SelfStarterV2(_launchpadTitle);
+        launchpad.transferOwnership(_msgSender());
+        address launchpadAddress = address(launchpad);
+        launchpads[_msgSender()].push(launchpadAddress);
+        operator[launchpadAddress] = _msgSender();
+        launchIndex[launchpadAddress] = block.timestamp;
+        emit LaunchpadDeployed(launchpadAddress, _msgSender());
+        return launchpad;
+    }
 }
