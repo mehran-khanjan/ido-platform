@@ -37,4 +37,8 @@ contract LaunchpadFactory is Ownable, ReentrancyGuard {
         emit LaunchpadDeployed(launchpadAddress, _msgSender());
         return launchpad;
     }
+
+    function getLaunchpadCount(address _user) external view returns (uint256) {
+        return launchpads[_user].length;
+    }
 }
