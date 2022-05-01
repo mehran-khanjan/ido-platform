@@ -41,4 +41,8 @@ contract LaunchpadFactory is Ownable, ReentrancyGuard {
     function getLaunchpadCount(address _user) external view returns (uint256) {
         return launchpads[_user].length;
     }
+
+    function toggleListEnforcement(bool _state) external onlyOwner {
+        whitelistEnforced = _state;
+    }
 }
