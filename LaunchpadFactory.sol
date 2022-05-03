@@ -45,4 +45,10 @@ contract LaunchpadFactory is Ownable, ReentrancyGuard {
     function toggleListEnforcement(bool _state) external onlyOwner {
         whitelistEnforced = _state;
     }
+
+    function modWhiteList(address[] calldata _whiteList, bool _state) external onlyOwner {
+        for (uint256 i = 0; i < _whiteList.length; ++i) {
+            whitelistedOperators[_whiteList[i]] = _state;
+        }
+    }
 }
