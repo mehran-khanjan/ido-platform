@@ -10,4 +10,18 @@ import "../base/Sweepable.sol";
 
 contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
     using SafeERC20 for IERC20;
+
+    struct Pool {
+        uint256 cap;
+        uint256 price;
+        uint256 maxCap;
+        address creator;
+        address token;
+        address swapToken;
+        bool isWhiteList;
+        bool onlyHolder;
+        bool enabled;
+        bool finished;
+    }
+
 }
