@@ -24,4 +24,5 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
         bool finished;
     }
 
+    address public superToken;
 }
