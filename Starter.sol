@@ -25,4 +25,6 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
     }
 
     address public superToken;
+
+    uint256 private minSuper = 1e19;
 }
