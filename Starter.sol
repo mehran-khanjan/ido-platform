@@ -30,4 +30,9 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
 
     uint256 private constant scaleFactor = 1e8;
     uint256 private constant defaultSpan = 1e5;
+
+    Pool[] public pools;
+    mapping(uint256 => uint256) public poolsSold;
+    mapping(uint256 => mapping(address => uint256)) public lockedTokens;
+    mapping(uint256 => mapping(address => uint256)) public whiteList;
 }
