@@ -35,4 +35,16 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
     mapping(uint256 => uint256) public poolsSold;
     mapping(uint256 => mapping(address => uint256)) public lockedTokens;
     mapping(uint256 => mapping(address => uint256)) public whiteList;
+
+    event NewPool(
+        uint256 id,
+        address indexed creator,
+        address token,
+        address swapToken,
+        uint256 cap,
+        uint256 price,
+        bool isWhiteList,
+        bool onlyHolder,
+        uint256 maxCap
+    );
 }
