@@ -47,4 +47,12 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
         bool onlyHolder,
         uint256 maxCap
     );
+
+    event Swap(
+        uint256 id,
+        uint256 roundID,
+        address sender,
+        uint256 amount,
+        uint256 amt
+    );
 }
