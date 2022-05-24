@@ -56,7 +56,13 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
         uint256 amt
     );
 
-    event Claim(uint256 id, address indexed claimer, uint256 amount, uint256 timestamp);
+    event Claim(
+        uint256 id,
+        address indexed claimer,
+        uint256 amount,
+        uint256 timestamp
+    );
     event PoolFinished(uint256 id, uint256 timestamp);
     event PoolStarted(uint256 id, uint256 timestamp);
+    event WhiteList(uint256 id, uint256 timestamp);
 }
