@@ -65,4 +65,9 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
     event PoolFinished(uint256 id, uint256 timestamp);
     event PoolStarted(uint256 id, uint256 timestamp);
     event WhiteList(uint256 id, uint256 timestamp);
+
+    constructor(uint256 _minSuper, address _superToken) {
+        minSuper = _minSuper;
+        superToken = _superToken;
+    }
 }
