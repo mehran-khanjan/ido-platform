@@ -70,4 +70,9 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
         minSuper = _minSuper;
         superToken = _superToken;
     }
+
+    modifier onlyCreator(uint256 id) {
+        require(pools[id].creator == _msgSender(), "Should be creator");
+        _;
+    }
 }
