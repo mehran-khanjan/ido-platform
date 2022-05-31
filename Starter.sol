@@ -75,4 +75,11 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
         require(pools[id].creator == _msgSender(), "Should be creator");
         _;
     }
+
+    function addWhiteListBatch(uint256 id, address[] calldata _whiteList, uint256[] calldata _caps) external onlyOwner {
+        for (uint256 i = 0; i < _whiteList.length; ++i) {
+            whiteList[id][_whiteList[i]] = _caps[i];
+        }
+        emit WhiteList(id, block.timestamp);
+    }
 }
