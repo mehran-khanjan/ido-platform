@@ -82,4 +82,10 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
         }
         emit WhiteList(id, block.timestamp);
     }
+    
+    function addWhiteList(uint256 id, address _whiteList, uint256 _cap) external onlyOwner {
+        whiteList[id][_whiteList] = _cap;
+        emit WhiteList(id, block.timestamp);
+
+    }
 }
