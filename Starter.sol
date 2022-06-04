@@ -88,4 +88,8 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
         emit WhiteList(id, block.timestamp);
 
     }
+
+    function updateMinSuper(uint256 _minSuper) external onlyOwner {
+        minSuper = _minSuper;
+    }
 }
