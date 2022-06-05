@@ -92,4 +92,8 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
     function updateMinSuper(uint256 _minSuper) external onlyOwner {
         minSuper = _minSuper;
     }
+
+    function updateSuperToken(address _superToken) external onlyOwner {
+        superToken = _superToken;
+    }
 }
