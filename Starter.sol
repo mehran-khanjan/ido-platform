@@ -96,4 +96,8 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
     function updateSuperToken(address _superToken) external onlyOwner {
         superToken = _superToken;
     }
+
+    function poolsLength() external view returns (uint256) {
+        return pools.length;
+    }
 }
