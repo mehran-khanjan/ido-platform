@@ -100,4 +100,46 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
     function poolsLength() external view returns (uint256) {
         return pools.length;
     }
+
+    function createPool(
+        address token,
+        address swapToken,
+        uint256 cap,
+        uint256 price,
+        bool isWhiteList,
+        bool onlyHolder,
+        uint256 maxCap
+    ) external onlyOwner returns (uint256) {
+        require(cap <= IERC20(token).balanceOf(_msgSender()) && cap > 0, "Cap check");
+        require(token != address(0), "Pool token cannot be zero address");
+        require(price > uint256(0), "Price must be greater than 0");
+        Pool memory newPool =
+            Pool(
+                cap,
+                price,
+                maxCap,
+                _msgSender(),
+                token,
+                swapToken,
+                isWhiteList,
+                onlyHolder,
+                false,
+                false
+            );
+        pools.push(newPool);
+        uint256 id = pools.length;
+        IERC20(token).safeTransferFrom(_msgSender(), address(this), cap);
+        emit NewPool(
+            id,
+            _msgSender(),
+            token,
+            swapToken,
+            cap,
+            price,
+            isWhiteList,
+            onlyHolder,
+            maxCap
+        );
+        return id;
+    }
 }
