@@ -142,4 +142,20 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
         );
         return id;
     }
+
+    function swap(uint256 id, uint256 amount) external payable {
+        require(amount != 0, "Amount should not be zero");
+        require(pools[id].enabled, "Pool must be enabled");
+        if (pools[id].onlyHolder) {
+            require(IERC20(superToken).balanceOf(_msgSender()) >= minSuper, "Miniumum for the pool");
+        }
+        if (pools[id].isWhiteList) {
+            require(whiteList[id][_msgSender()] > 0, "Should be white listed for the pool");
+        }
+        if (pools[id].swapToken == address(0)) {
+            require(amount == msg.value, "Amount is not equal msg.value");
+        }
+        _simpleSwap(id, amount);
+    }
+
 }
