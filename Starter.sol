@@ -158,4 +158,43 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
         _simpleSwap(id, amount);
     }
 
+    function _simpleSwap(uint256 id, uint256 amount) internal {
+        Pool memory pool = pools[id];
+        uint256 left = pool.cap - poolsSold[id];
+        uint256 curLocked = lockedTokens[id][_msgSender()];
+        if (left > pool.maxCap - curLocked) {
+            left = pool.maxCap - curLocked;
+        }
+        if (pool.isWhiteList && left > whiteList[id][_msgSender()] - curLocked) {
+            left = whiteList[id][_msgSender()] - curLocked;
+        }
+        require(left > 0, "Not enough tokens for swap");
+        uint256 amt = (pool.price * amount) / scaleFactor;
+
+        uint256 back = 0;
+        if (left < amt) {
+            amt = left;
+            uint256 newAmount = (amt * scaleFactor) / pool.price;
+
+            back = amount - newAmount;
+            amount = newAmount;
+        }
+        lockedTokens[id][_msgSender()] = curLocked + amt;
+        poolsSold[id] = poolsSold[id ]+ amt;
+        if (pool.swapToken == address(0)) {
+            (bool success, ) = payable(pool.creator).call{value: amount}("");
+            require(success, "Should transfer ethers to the pool creator");
+            if (back > 0) {
+                (success, ) = _msgSender().call{value: back}("");
+                require(success, "Should transfer left ethers back to the user");
+            }
+        } else {
+            IERC20(pool.swapToken).safeTransfer(
+                pool.creator,
+                amount
+            );
+        }
+        emit Swap(id, 0, _msgSender(), amount, amt);
+    }
+
 }
