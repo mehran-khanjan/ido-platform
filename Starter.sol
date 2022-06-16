@@ -197,4 +197,11 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
         emit Swap(id, 0, _msgSender(), amount, amt);
     }
 
+    function startPool(uint256 id) external onlyCreator(id) {
+        require(!pools[id].enabled, "Pool is already enabled");
+        require(!pools[id].finished, "Pool is already completed");
+        pools[id].enabled = true;
+        emit PoolStarted(id, block.timestamp);
+    }
+
 }
