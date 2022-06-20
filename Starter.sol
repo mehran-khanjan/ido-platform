@@ -212,5 +212,14 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
         emit PoolFinished(id, block.timestamp);
     }
 
+    function claim(uint256 id) external nonReentrant {
+        require(pools[id].finished, "Cannot claim until pool is finished");
+        require(lockedTokens[id][_msgSender()] > 0, "Should have tokens to claim");
+        uint256 amount = lockedTokens[id][_msgSender()];
+        lockedTokens[id][_msgSender()] = 0;
+        IERC20(pools[id].token).safeTransfer(_msgSender(), amount);
+        emit Claim(id, _msgSender(), amount, block.timestamp);
+    }
+
 
 }
