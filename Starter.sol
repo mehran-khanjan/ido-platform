@@ -229,4 +229,12 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
         _;
     }
 
+    modifier atStageOrderPlacementAndCancelation(uint256 auctionId) {
+        require(
+            block.timestamp < auctionData[auctionId].orderCancellationEndDate,
+            "no longer in order placement and cancelation phase"
+        );
+        _;
+    }
+
 }
