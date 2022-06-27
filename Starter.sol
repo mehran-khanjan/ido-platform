@@ -258,4 +258,11 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
         _;
     }
 
+    event NewSellOrder(
+        uint256 indexed auctionId,
+        uint64 indexed userId,
+        uint96 buyAmount,
+        uint96 sellAmount
+    );
+
 }
