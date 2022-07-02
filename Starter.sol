@@ -278,4 +278,20 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
         uint96 buyAmount,
         uint96 sellAmount
     );
+
+    event NewUser(uint64 indexed userId, address indexed userAddress);
+    event NewAuction(
+        uint256 indexed auctionId,
+        IERC20 indexed _auctioningToken,
+        IERC20 indexed _biddingToken,
+        uint256 orderCancellationEndDate,
+        uint256 auctionEndDate,
+        uint64 userId,
+        uint96 _auctionedSellAmount,
+        uint96 _minBuyAmount,
+        uint256 minimumBiddingAmountPerOrder,
+        uint256 minFundingThreshold,
+        address allowListContract,
+        bytes allowListData
+    );
 }
