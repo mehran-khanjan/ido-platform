@@ -294,4 +294,12 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
         address allowListContract,
         bytes allowListData
     );
+
+    event AuctionCleared(
+        uint256 indexed auctionId,
+        uint96 soldAuctioningTokens,
+        uint96 soldBiddingTokens,
+        bytes32 clearingPriceOrder
+    );
+    event UserRegistration(address indexed user, uint64 userId);
 }
