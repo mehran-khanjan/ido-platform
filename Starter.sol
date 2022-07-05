@@ -319,4 +319,6 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
         uint256 feeNumerator;
         uint256 minFundingThreshold;
     }
+
+    mapping(uint256 => IterableOrderedOrderSet.Data) internal sellOrders;
 }
