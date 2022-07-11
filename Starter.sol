@@ -323,4 +323,5 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
     mapping(uint256 => IterableOrderedOrderSet.Data) internal sellOrders;
     mapping(uint256 => AuctionData) public auctionData;
     mapping(uint256 => address) public auctionAccessManager;
+    mapping(uint256 => bytes) public auctionAccessData;
 }
