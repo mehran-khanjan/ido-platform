@@ -326,4 +326,7 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
     mapping(uint256 => bytes) public auctionAccessData;
 
     IdToAddressBiMap.Data private registeredUsers;
+
+    uint64 public numUsers;
+    uint256 public auctionCounter;
 }
