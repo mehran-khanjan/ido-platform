@@ -329,4 +329,6 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
 
     uint64 public numUsers;
     uint256 public auctionCounter;
+
+    constructor() public Ownable() {}
 }
