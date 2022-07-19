@@ -333,4 +333,6 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
     constructor() public Ownable() {}
 
     uint256 public feeNumerator = 0;
+
+    uint256 public constant FEE_DENOMINATOR = 1000;
 }
