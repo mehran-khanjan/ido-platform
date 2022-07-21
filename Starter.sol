@@ -335,4 +335,18 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
     uint256 public feeNumerator = 0;
     uint256 public constant FEE_DENOMINATOR = 1000;
     uint64 public feeReceiverUserId = 1;
+
+    function setFeeParameters(
+        uint256 newFeeNumerator,
+        address newfeeReceiverAddress
+    ) public onlyOwner() {
+        require(
+            newFeeNumerator <= 15,
+            "Fee is not allowed to be set higher than 1.5%"
+        );
+        // caution: for currently running auctions, the feeReceiverUserId is changing as well.
+        feeReceiverUserId = getUserId(newfeeReceiverAddress);
+        feeNumerator = newFeeNumerator;
+    }
+
 }
