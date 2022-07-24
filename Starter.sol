@@ -361,6 +361,15 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
         bool isAtomicClosureAllowed,
         address accessManagerContract,
         bytes memory accessManagerContractData
-    ) public returns (uint256) {}
+    ) public returns (uint256) {
+        // withdraws sellAmount + fees
+        _auctioningToken.safeTransferFrom(
+            msg.sender,
+            address(this),
+            _auctionedSellAmount.mul(FEE_DENOMINATOR.add(feeNumerator)).div(
+                FEE_DENOMINATOR
+            ) //[0]
+        );
+    }
 
 }
