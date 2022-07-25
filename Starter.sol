@@ -370,6 +370,8 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
                 FEE_DENOMINATOR
             ) //[0]
         );
+
+        require(_auctionedSellAmount > 0, "cannot auction zero tokens");
     }
 
 }
