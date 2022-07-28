@@ -377,6 +377,11 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
             minimumBiddingAmountPerOrder > 0,
             "minimumBiddingAmountPerOrder is not allowed to be zero"
         );
+
+        require(
+            orderCancellationEndDate <= auctionEndDate,
+            "time periods are not configured correctly"
+        );
     }
 
 }
