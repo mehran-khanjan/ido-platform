@@ -382,6 +382,11 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
             orderCancellationEndDate <= auctionEndDate,
             "time periods are not configured correctly"
         );
+
+        require(
+            auctionEndDate > block.timestamp,
+            "auction end date must be in the future"
+        );
     }
 
 }
