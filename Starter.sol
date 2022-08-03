@@ -387,6 +387,8 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
             auctionEndDate > block.timestamp,
             "auction end date must be in the future"
         );
+
+        auctionCounter = auctionCounter.add(1);
     }
 
 }
