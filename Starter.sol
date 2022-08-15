@@ -429,6 +429,7 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
             accessManagerContract,
             accessManagerContractData
         );
+        return auctionCounter;
     }
 
 }
