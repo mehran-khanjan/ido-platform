@@ -476,6 +476,16 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
         bytes32[] memory _prevSellOrders,
         bytes calldata allowListCallData,
         address orderSubmitter
-    ) external atStageOrderPlacement(auctionId) returns (uint64 userId) {}
+    ) external atStageOrderPlacement(auctionId) returns (uint64 userId) {
+        return
+            _placeSellOrders(
+                auctionId,
+                _minBuyAmounts,
+                _sellAmounts,
+                _prevSellOrders,
+                allowListCallData,
+                orderSubmitter
+            );
+    }
 
 }
