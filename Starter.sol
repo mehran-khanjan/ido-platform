@@ -497,6 +497,7 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
         address orderSubmitter
     ) internal returns (uint64 userId) {
         address allowListManager = auctionAccessManager[auctionId];
+        if (allowListManager != address(0)) {}
     }
 
 }
