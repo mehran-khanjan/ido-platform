@@ -507,6 +507,14 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
                     "user not allowed to place order"
                 );
         }
+
+        {
+            (
+                ,
+                uint96 buyAmountOfInitialAuctionOrder,
+                uint96 sellAmountOfInitialAuctionOrder
+            ) = auctionData[auctionId].initialAuctionOrder.decodeOrder();
+        }
     }
 
 }
