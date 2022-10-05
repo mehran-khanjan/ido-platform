@@ -558,6 +558,12 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
                     _sellAmounts[i]
                 );
             }
+
+        auctionData[auctionId].biddingToken.safeTransferFrom(
+            msg.sender,
+            address(this),
+            sumOfSellAmounts
+        );
     }
 
 }
