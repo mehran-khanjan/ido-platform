@@ -649,4 +649,13 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
             );
     }
 
+    function _placeSellOrders(
+        uint256 auctionId,
+        uint96[] memory _minBuyAmounts,
+        uint96[] memory _sellAmounts,
+        bytes32[] memory _prevSellOrders,
+        bytes calldata allowListCallData,
+        address orderSubmitter
+    ) internal returns (uint64 userId) {}
+
 }
