@@ -659,7 +659,16 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
     ) internal returns (uint64 userId) {
         
         address allowListManager = auctionAccessManager[auctionId];
-        if (allowListManager != address(0)) {}
+        if (allowListManager != address(0)) {
+            require(
+                    AllowListVerifier(allowListManager).isAllowed(
+                        orderSubmitter,
+                        auctionId,
+                        allowListCallData
+                    ) == AllowListVerifierHelper.MAGICVALUE,
+                    "user not allowed to place order"
+                );
+        }
     }
 
 }
