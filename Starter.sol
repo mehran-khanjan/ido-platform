@@ -669,7 +669,7 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
                     "user not allowed to place order"
                 );
         }
-    }
+    
 
     {
             (
@@ -685,6 +685,10 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
                     "limit price not better than mimimal offer"
                 );
             }
+    }
+
+    uint256 sumOfSellAmounts = 0;
+
     }
 
 }
