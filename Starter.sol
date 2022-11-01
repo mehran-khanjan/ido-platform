@@ -689,6 +689,8 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
 
     uint256 sumOfSellAmounts = 0;
     userId = getUserId(orderSubmitter);
+    uint256 minimumBiddingAmountPerOrder =
+            auctionData[auctionId].minimumBiddingAmountPerOrder;
 
     }
 
