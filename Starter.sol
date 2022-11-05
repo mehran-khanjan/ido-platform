@@ -698,6 +698,11 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
                         sellAmountOfInitialAuctionOrder.mul(_sellAmounts[i]),
                     "limit price not better than mimimal offer"
                 );
+
+        require(
+                _sellAmounts[i] > minimumBiddingAmountPerOrder,
+                "order too small"
+            );
     }
 
     }
