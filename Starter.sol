@@ -703,6 +703,17 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
                 _sellAmounts[i] > minimumBiddingAmountPerOrder,
                 "order too small"
             );
+
+        if (
+                sellOrders[auctionId].insert(
+                    IterableOrderedOrderSet.encodeOrder(
+                        userId,
+                        _minBuyAmounts[i],
+                        _sellAmounts[i]
+                    ),
+                    _prevSellOrders[i]
+                )
+            ) {}
     }
 
     }
