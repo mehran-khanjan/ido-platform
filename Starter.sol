@@ -738,6 +738,7 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
     {
         uint64 userId = getUserId(msg.sender);
         uint256 claimableAmount = 0;
+        for (uint256 i = 0; i < _sellOrders.length; i++) {}
     }
 
 }
