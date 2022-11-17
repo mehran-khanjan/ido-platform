@@ -743,6 +743,14 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
             // it can be used as a reference point to insert a new node.
             bool success =
                 sellOrders[auctionId].removeKeepHistory(_sellOrders[i]);
+
+                if (success) {
+                (
+                        uint64 userIdOfIter,
+                        uint96 buyAmountOfIter,
+                        uint96 sellAmountOfIter
+                ) = _sellOrders[i].decodeOrder();
+                }
         }
     }
 
