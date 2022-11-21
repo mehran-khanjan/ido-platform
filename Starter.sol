@@ -755,6 +755,8 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
                     userIdOfIter == userId,
                     "Only the user can cancel his orders"
                 );
+
+                 claimableAmount = claimableAmount.add(sellAmountOfIter);
                 
                 }
         }
