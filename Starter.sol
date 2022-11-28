@@ -780,7 +780,13 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
     ) public atStageSolutionSubmission(auctionId) {
         (, , uint96 auctioneerSellAmount) =
             auctionData[auctionId].initialAuctionOrder.decodeOrder();
-            for (uint256 i = 0; i < _minBuyAmounts.length; i++) {}
+            for (uint256 i = 0; i < _minBuyAmounts.length; i++) {
+                require(
+                    _minBuyAmounts[i].mul(buyAmountOfInitialAuctionOrder) <
+                        sellAmountOfInitialAuctionOrder.mul(_sellAmounts[i]),
+                    "limit price not better than mimimal offer"
+                );
+            }
     }
 
 }
