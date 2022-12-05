@@ -798,6 +798,14 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
                 _minBuyAmounts[i] > 0,
                 "_minBuyAmounts must be greater than 0"
             );
+            
+            // orders should have a minimum bid size in order to limit the gas
+            // required to compute the final price of the auction.
+            require(
+                _sellAmounts[i] > minimumBiddingAmountPerOrder,
+                "order too small"
+            );
+
         }
     }
 
