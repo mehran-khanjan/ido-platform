@@ -837,6 +837,8 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
     function cancelSellOrders(uint256 auctionId, bytes32[] memory _sellOrders)
         public
         atStageOrderPlacementAndCancelation(auctionId)
-    {}
+    {
+        uint64 userId = getUserId(msg.sender);
+    }
 
 }
