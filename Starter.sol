@@ -851,6 +851,10 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
                     uint96 buyAmountOfIter,
                     uint96 sellAmountOfIter
                 ) = _sellOrders[i].decodeOrder();
+                require(
+                    userIdOfIter == userId,
+                    "Only the user can cancel his orders"
+                );
                 }
         }
     }
