@@ -883,6 +883,7 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
         for (uint256 i = 0; i < iterationSteps; i++) {
             iterOrder = sellOrders[auctionId].next(iterOrder);
             (, , uint96 sellAmountOfIter) = iterOrder.decodeOrder();
+            sumBidAmount = sumBidAmount.add(sellAmountOfIter);
         }
     }
 
