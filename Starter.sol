@@ -890,6 +890,9 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
             iterOrder != IterableOrderedOrderSet.QUEUE_END,
             "reached end of order list"
         );
+
+        (, uint96 buyAmountOfIter, uint96 sellAmountOfIter) =
+            iterOrder.decodeOrder();
     }
 
 }
