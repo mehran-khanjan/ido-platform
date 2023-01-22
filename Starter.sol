@@ -893,6 +893,12 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
 
         (, uint96 buyAmountOfIter, uint96 sellAmountOfIter) =
             iterOrder.decodeOrder();
+            
+        require(
+            sumBidAmount.mul(buyAmountOfIter) <
+                auctioneerSellAmount.mul(sellAmountOfIter),
+            "too many orders summed up"
+        );
     }
 
 }
