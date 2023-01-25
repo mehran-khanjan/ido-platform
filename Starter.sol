@@ -904,4 +904,12 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
         auctionData[auctionId].interimOrder = iterOrder;
     }
 
+    function settleAuctionAtomically(
+        uint256 auctionId,
+        uint96[] memory _minBuyAmount,
+        uint96[] memory _sellAmount,
+        bytes32[] memory _prevSellOrder,
+        bytes calldata allowListCallData
+    ) public atStageSolutionSubmission(auctionId) {}
+
 }
