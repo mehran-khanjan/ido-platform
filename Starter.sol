@@ -910,6 +910,11 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
         uint96[] memory _sellAmount,
         bytes32[] memory _prevSellOrder,
         bytes calldata allowListCallData
-    ) public atStageSolutionSubmission(auctionId) {}
+    ) public atStageSolutionSubmission(auctionId) {
+        require(
+            auctionData[auctionId].isAtomicClosureAllowed,
+            "not allowed to settle auction atomically"
+        );
+    }
 
 }
