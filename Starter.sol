@@ -915,6 +915,10 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
             auctionData[auctionId].isAtomicClosureAllowed,
             "not allowed to settle auction atomically"
         );
+        require(
+            _minBuyAmount.length == 1 && _sellAmount.length == 1,
+            "Only one order can be placed atomically"
+        );
     }
 
 }
