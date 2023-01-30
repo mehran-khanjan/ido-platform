@@ -919,6 +919,7 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
             _minBuyAmount.length == 1 && _sellAmount.length == 1,
             "Only one order can be placed atomically"
         );
+        uint64 userId = getUserId(msg.sender);
     }
 
 }
