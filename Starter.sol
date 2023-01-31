@@ -920,6 +920,16 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
             "Only one order can be placed atomically"
         );
         uint64 userId = getUserId(msg.sender);
+        require(
+            auctionData[auctionId].interimOrder.smallerThan(
+                IterableOrderedOrderSet.encodeOrder(
+                    userId,
+                    _minBuyAmount[0],
+                    _sellAmount[0]
+                )
+            ),
+            "precalculateSellAmountSum is already too advanced"
+        );
     }
 
 }
