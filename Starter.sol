@@ -930,6 +930,14 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
             ),
             "precalculateSellAmountSum is already too advanced"
         );
+        _placeSellOrders(
+            auctionId,
+            _minBuyAmount,
+            _sellAmount,
+            _prevSellOrder,
+            allowListCallData,
+            msg.sender
+        );
     }
 
 }
