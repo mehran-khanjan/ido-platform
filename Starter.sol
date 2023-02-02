@@ -938,6 +938,7 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
             allowListCallData,
             msg.sender
         );
+        settleAuction(auctionId);
     }
 
 }
