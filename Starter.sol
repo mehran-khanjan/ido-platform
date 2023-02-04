@@ -941,4 +941,11 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
         settleAuction(auctionId);
     }
 
+    // @dev function settling the auction and calculating the price
+    function settleAuction(uint256 auctionId)
+        public
+        atStageSolutionSubmission(auctionId)
+        returns (bytes32 clearingOrder)
+    {}
+
 }
