@@ -957,6 +957,7 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
         bytes32 currentOrder = auctionData[auctionId].interimOrder;
         uint256 buyAmountOfIter;
         uint256 sellAmountOfIter;
+        uint96 fillVolumeOfAuctioneerOrder = fullAuctionedAmount;
     }
 
 }
