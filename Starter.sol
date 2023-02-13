@@ -970,6 +970,12 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
             currentBidSum.mul(buyAmountOfIter) <
                 fullAuctionedAmount.mul(sellAmountOfIter)
         );
+
+        if (
+            currentBidSum > 0 &&
+            currentBidSum.mul(buyAmountOfIter) >=
+            fullAuctionedAmount.mul(sellAmountOfIter)
+        ) {}
     }
 
 }
