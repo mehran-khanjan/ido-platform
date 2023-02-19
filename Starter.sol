@@ -990,7 +990,7 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
                 auctionData[auctionId]
                     .volumeClearingPriceOrder = sellAmountClearingOrder
                     .toUint96();
-                
+                currentBidSum = currentBidSum.sub(uncoveredBids);
                 
             }
         }
