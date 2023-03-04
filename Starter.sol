@@ -1034,6 +1034,12 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
             auctioneerId,
             fullAuctionedAmount
         );
+        emit AuctionCleared(
+            auctionId,
+            fillVolumeOfAuctioneerOrder,
+            uint96(currentBidSum),
+            clearingOrder
+        );
 
     }
 
