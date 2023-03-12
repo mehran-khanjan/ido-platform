@@ -564,6 +564,7 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
             address(this),
             sumOfSellAmounts
         );
+    }
 
         function cancelSellOrders(uint256 auctionId, bytes32[] memory _sellOrders)
         public
@@ -590,7 +591,7 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
             feeNumerator,
             minFundingThreshold
         );
-        }
+        
 
         auctionAccessManager[auctionCounter] = accessManagerContract;
         auctionAccessData[auctionCounter] = accessManagerContractData;
@@ -627,7 +628,7 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
                 _prevSellOrders,
                 allowListCallData,
                 msg.sender
-            )
+            );
     }
 
     function placeSellOrdersOnBehalf(
@@ -1048,5 +1049,17 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
         auctionData[auctionId].interimSumBidAmount = uint256(0);
         auctionData[auctionId].minimumBiddingAmountPerOrder = uint256(0);
     }
+
+    function claimFromParticipantOrder(
+        uint256 auctionId,
+        bytes32[] memory orders
+    )
+        public
+        atStageFinished(auctionId)
+        returns (
+            uint256 sumAuctioningTokenAmount,
+            uint256 sumBiddingTokenAmount
+        )
+    {}
 
 }
