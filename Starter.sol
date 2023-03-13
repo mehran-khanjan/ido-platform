@@ -1060,6 +1060,15 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
             uint256 sumAuctioningTokenAmount,
             uint256 sumBiddingTokenAmount
         )
-    {}
+    {
+        for (uint256 i = 0; i < orders.length; i++) {
+            // Note: we don't need to keep any information about the node since
+            // no new elements need to be inserted.
+            require(
+                sellOrders[auctionId].remove(orders[i]),
+                "order is no longer claimable"
+            );
+        }
+    }
 
 }
