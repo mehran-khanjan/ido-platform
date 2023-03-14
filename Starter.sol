@@ -1069,6 +1069,7 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
                 "order is no longer claimable"
             );
         }
+        AuctionData memory auction = auctionData[auctionId];
     }
 
 }
