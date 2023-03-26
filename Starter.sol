@@ -1078,7 +1078,10 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
         bool minFundingThresholdNotReached =
             auctionData[auctionId].minFundingThresholdNotReached;
 
-        for (uint256 i = 0; i < orders.length; i++) {}
+        for (uint256 i = 0; i < orders.length; i++) {
+            (uint64 userIdOrder, uint96 buyAmount, uint96 sellAmount) =
+                orders[i].decodeOrder();
+        }
     }
 
 }
