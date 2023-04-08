@@ -1131,6 +1131,11 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
         uint256 fillVolumeOfAuctioneerOrder,
         uint64 auctioneerId,
         uint96 fullAuctionedAmount
-    ) internal {}
+    ) internal {
+        uint256 feeAmount =
+            fullAuctionedAmount.mul(auctionData[auctionId].feeNumerator).div(
+                FEE_DENOMINATOR
+            ); //[20]
+    }
 
 }
