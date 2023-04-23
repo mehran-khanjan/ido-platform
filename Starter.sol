@@ -1184,6 +1184,12 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
         uint64 userId
     ) internal {
         address userAddress = registeredUsers.getAddressAt(userId);
+        if (auctioningTokenAmount > 0) {
+            auctionData[auctionId].auctioningToken.safeTransfer(
+                userAddress,
+                auctioningTokenAmount
+            );
+        }
     }
 
 }
