@@ -1198,4 +1198,6 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
         }
     }
 
+    function registerUser(address user) public returns (uint64 userId) {}
+
 }
