@@ -1205,6 +1205,7 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
             "User already registered"
         );
         userId = numUsers;
+        emit UserRegistration(user, userId);
     }
 
 }
