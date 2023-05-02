@@ -1208,6 +1208,10 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
         emit UserRegistration(user, userId);
     }
 
-    function getUserId(address user) public returns (uint64 userId) {}
+    function getUserId(address user) public returns (uint64 userId) {
+        if (registeredUsers.hasAddress(user)) {
+            userId = registeredUsers.getId(user);
+        }
+    }
 
 }
