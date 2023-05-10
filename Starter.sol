@@ -1229,6 +1229,8 @@ contract SuperStarter is Ownable, ReentrancyGuard, Sweepable {
     public
         view
         returns (bool)
-    {}
+    {
+        return sellOrders[auctionId].contains(order);
+    }
 
 }
